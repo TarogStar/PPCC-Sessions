@@ -460,21 +460,33 @@ header h1 {
 /* Responsive design */
 @media (max-width: 768px) {
     body {
-        padding: 10px;
+        padding: 5px;
+    }
+
+    header {
+        padding: 10px 15px;
     }
 
     header h1 {
-        font-size: 1.8em;
+        font-size: 1.3em;
     }
 
-    .controls,
+    .subtitle {
+        font-size: 0.8em;
+    }
+
+    .controls-header,
     .session-list {
-        padding: 20px;
+        padding: 10px 15px;
+    }
+
+    .filters-panel {
+        padding: 10px 15px 15px 15px;
     }
 
     .filter-group {
         flex-direction: column;
-        gap: 15px;
+        gap: 10px;
     }
 
     .session-meta {
@@ -482,17 +494,69 @@ header h1 {
         gap: 8px;
     }
 
+    /* Hide badges on mobile - border colors already indicate MS and overlaps */
+    .session-badges {
+        display: none;
+    }
+
+    /* Adjust grid for mobile - no badge column needed */
     .session-header {
+        grid-template-columns: 1fr auto auto;
+        padding: 6px 8px;
+        gap: 8px;
+    }
+
+    /* Make session info stack vertically on mobile */
+    .session-main-info {
+        display: flex;
         flex-direction: column;
+        gap: 4px;
+        min-width: 0;
+    }
+
+    .session-title {
+        font-size: 0.85em;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        line-height: 1.3;
+    }
+
+    .session-time {
+        font-size: 0.7em;
+        font-weight: 600;
+    }
+
+    .session-speakers-preview {
+        display: none;
+    }
+
+    .session-location {
+        font-size: 0.7em;
     }
 
     .session-actions {
-        width: 100%;
-        justify-content: flex-end;
+        display: flex;
+        gap: 6px;
+    }
+
+    .interest-btn,
+    .expand-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.85em;
     }
 
     .speakers-list {
         grid-template-columns: 1fr;
+    }
+
+    .date-header {
+        font-size: 1em;
+    }
+
+    .session-card {
+        margin-bottom: 6px;
     }
 }
 
