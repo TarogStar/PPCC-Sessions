@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Platform Conference Session Browser</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Power Platform Conference Sessions</h1>
+            <p class="subtitle">Find and track your sessions of interest</p>
+        </header>
+
+        <div class="controls">
+            <div class="controls-header">
+                <div class="stats">
+                    <span id="sessionCount">Loading sessions...</span>
+                </div>
+                <button id="toggleFilters" class="toggle-filters-btn" title="Show/Hide Filters">▼ Filters</button>
+            </div>
+            <div id="filtersPanel" class="filters-panel">
+                <div class="filter-group">
+                    <label>
+                        <input type="checkbox" id="filterMicrosoft" checked>
+                        Show only Microsoft sessions
+                    </label>
+                    <label>
+                        <input type="checkbox" id="filterOverlaps" checked>
+                        Show only overlapping sessions
+                    </label>
+                    <label>
+                        <input type="checkbox" id="filterInterested">
+                        Show only sessions I'm interested in
+                    </label>
+                </div>
+                <div class="search-group">
+                    <input type="text" id="searchInput" placeholder="Search sessions by title, speaker, or description...">
+                </div>
+                <div class="date-filter">
+                    <label for="dateFilter">Filter by date:</label>
+                    <select id="dateFilter">
+                        <option value="all">All dates</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="sessionList" class="session-list">
+            <div class="loading">Loading sessions...</div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
