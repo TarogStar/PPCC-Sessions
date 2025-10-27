@@ -80,10 +80,17 @@ function formatTime(timeStr) {
     return timeStr; // Already in "9:00 AM" format
 }
 
-// Format date for display
+// Format date for display (in Pacific Time - Las Vegas timezone)
 function formatDate(dateStr) {
-    const date = new Date(dateStr);
-    return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    // Parse as Pacific Time to match conference location
+    const date = new Date(dateStr + 'T00:00:00-07:00'); // PDT offset
+    return date.toLocaleDateString('en-US', {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+        timeZone: 'America/Los_Angeles'
+    });
 }
 
 // Create session card HTML
@@ -202,6 +209,9 @@ function applyFilters() {
     const dateFilter = document.getElementById('dateFilter').value;
 
     const overlaps = findOverlappingSessions();
+    // Get current date in Pacific Time (Las Vegas conference location)
+    const todayPacific = new Date().toLocaleDateString('en-US', { timeZone: 'America/Los_Angeles' });
+    const today = new Date(todayPacific);
 
     filteredSessions = allSessions.filter(session => {
         // Filter by Microsoft
@@ -215,6 +225,12 @@ function applyFilters() {
 
         // Filter by date
         if (dateFilter !== 'all' && session.date !== dateFilter) return false;
+
+        // Hide past dates unless specifically selected (compare in Pacific Time)
+        if (dateFilter === 'all') {
+            const sessionDate = new Date(session.date + 'T00:00:00-07:00');
+            if (sessionDate < today) return false;
+        }
 
         // Filter by search term
         if (searchTerm) {
